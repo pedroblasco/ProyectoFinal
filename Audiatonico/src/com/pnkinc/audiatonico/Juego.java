@@ -30,7 +30,7 @@ public class Juego extends Activity
 	RelativeLayout botones1;
 	ImageButton botonArr1;
 		
-	SoundManager snd;
+	AudioAssistant snd;
 	int doc, red, mie, faf, solg, laa, sib, docag;
 	int streamID;
 		
@@ -46,7 +46,7 @@ public class Juego extends Activity
 		botones1.setVisibility(View.INVISIBLE);
 		
 		//Creamos la instancia del SoundManager.
-		snd = new SoundManager(getApplicationContext());
+		snd = new AudioAssistant(getApplicationContext());
 		
 		//Asignamos el volumen multimedia a la aplicación.
 		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
