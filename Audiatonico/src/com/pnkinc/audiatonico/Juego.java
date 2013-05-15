@@ -1,17 +1,16 @@
 package com.pnkinc.audiatonico;
 
-import java.util.Random;
-
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class Juego extends Activity 
 {
@@ -21,11 +20,12 @@ public class Juego extends Activity
 	private int j = 2;
 	private int cont = 0;
 	private int idSound = 0;
-	int game = 0;
 	private ImageView textoNota, intentosRestantes;
-	private int k=0;
-	int fallos = 0;
-	int juego = 0;
+	private TextView textoJuego;
+	//private int k=0;
+	private int fallos = 0;
+	private int juego = 0;
+	private Handler handler = new Handler();
 	
 	RelativeLayout botones1;
 	ImageButton botonArr1;
@@ -39,11 +39,15 @@ public class Juego extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_layout);
+		textoJuego = (TextView)findViewById(R.id.textView1);
 		textoNota = (ImageView)findViewById(R.id.imageView1);
 		intentosRestantes = (ImageView)findViewById(R.id.imageView2);
 		botones1 = (RelativeLayout)findViewById(R.id.relayout1);
 		botonArr1 = (ImageButton)findViewById(R.id.button1);
 		botones1.setVisibility(View.INVISIBLE);
+		Typeface fuenteJuego = Typeface.createFromAsset(getAssets(), "fonts/8bitwonder.ttf");
+		textoJuego.setTypeface(fuenteJuego);
+		textoJuego.setVisibility(View.INVISIBLE);
 		
 		//Creamos la instancia del SoundManager.
 		snd = new AudioAssistant(getApplicationContext());
@@ -118,27 +122,18 @@ public void clickHandler(View v)
 			break;
 			
 		case R.id.button1:
-			if (juego==0){
-				arrayRandomSounds = new int[j];
-
-				for(int i=0; i<arrayRandomSounds.length; i++){
-					arrayRandomSounds[i]=snd.getRandomSound(arraySounds);
-				}
-			}else{
-				j+=2;
-				int[] otroArrayAuxiliar = new int[arrayRandomSounds.length];
-				System.arraycopy(arrayRandomSounds, 0, otroArrayAuxiliar, 0, arrayRandomSounds.length);
-				arrayRandomSounds = new int[j];
-				for(int i=0; i<arrayRandomSounds.length; i++){
-					if(i < otroArrayAuxiliar.length){
-						arrayRandomSounds[i] = otroArrayAuxiliar[i];
-					}
-					else{
-						arrayRandomSounds[i]=snd.getRandomSound(arraySounds);
-					}
-				}
-			}			
-			playAndShow();
+			fallos=0;
+			cont=0;
+			textoJuego.setVisibility(View.VISIBLE);
+			textoJuego.setText("RONDA " + (juego+1));
+			botonArr1.setVisibility(View.INVISIBLE); 
+			arrayRandomSounds = snd.fillArrays(juego, arraySounds, arrayRandomSounds);
+			handler.postDelayed(new Runnable() { 
+				public void run() {
+					textoJuego.setVisibility(View.INVISIBLE);
+				} 
+			}, 1300);
+			snd.playAndShow(arrayImages, arrayRandomSounds, textoNota, botones1);
 			break;
 		}
 	
@@ -147,27 +142,33 @@ public void clickHandler(View v)
 				Log.d("ACIERTO", "¡Has acertado!");
 				textoNota.setImageResource(R.drawable.textoacierto);
 				cont++;
+				handler.postDelayed(new Runnable() { 
+					public void run() {
+						textoNota.setImageResource(R.drawable.viewpred);
+					}
+				}, 700);
 			}else{
 				Log.d("FALLO", "¡Has fallado!");
 				textoNota.setImageResource(R.drawable.notaerror);
 				fallos++;
+				handler.postDelayed(new Runnable() { 
+					public void run() {
+						textoNota.setImageResource(R.drawable.viewpred);
+					}
+				}, 700);
 			}
 		}
-		fallos = snd.manageFailures(fallos, intentosRestantes);
+		juego=snd.manageFailures(fallos, intentosRestantes, textoJuego, juego, botones1, botonArr1);
 		idSound = 0;
 		
 		if (cont >= arrayRandomSounds.length){
-			botones1.setVisibility(View.INVISIBLE);
-			botonArr1.setVisibility(View.VISIBLE);
-			cont = 0;
-			juego++;
-			fallos = 0;
+			juego = snd.roundBeaten(juego, botones1, botonArr1, textoJuego, textoNota);
+			cont = 0;		
 		}
 	}
 	
-	private void playAndShow(){
+	/*private void playAndShow(){
 		if(k < arrayRandomSounds.length){
-			Handler handler = new Handler();
 			handler.postDelayed(new Runnable() { 
 				public void run() {
 					snd.playForShow(arrayRandomSounds[k], textoNota, arrayImages);
@@ -177,17 +178,14 @@ public void clickHandler(View v)
 			}, 1500);
 		}
 		else{
-			Handler handler = new Handler();
 			handler.postDelayed(new Runnable() { 
 				public void run() {
 					k=0;
-					idSound = 0;
 					textoNota.setImageResource(R.drawable.viewpred);
 					botones1.setVisibility(View.VISIBLE);
-					botonArr1.setVisibility(View.INVISIBLE); 
 				} 
 			}, 1500);
 		}
-	}
+	}*/
 }
 
