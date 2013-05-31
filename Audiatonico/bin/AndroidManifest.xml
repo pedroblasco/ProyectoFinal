@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="Juego"></activity>
+        <activity android:name="AudiaOptions"></activity>
     </application>
 
 </manifest>

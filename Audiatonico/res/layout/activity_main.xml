@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#000000"
     tools:context=".MainActivity" >
 
     <TextView
@@ -10,34 +11,36 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
-        android:text="@string/tit_app"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="49dp"
+        android:textSize="25sp"
+        android:textColor="#ffffff"
+        android:text="Audiatonico" />
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:text="@string/bot_jug" />
+        android:background="@drawable/botonunjugadorestilo" />
 
-    <Button
-        android:id="@+id/button3"
+    <ImageButton
+        android:id="@+id/buttonOptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/bot_acede" />
+        android:layout_alignLeft="@+id/buttonGame"
+        android:layout_below="@+id/buttonGame"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/botonopcionesestilo" />
 
-    <Button
-        android:id="@+id/button2"
+    <ImageButton
+        android:id="@+id/buttonAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/bot_opt" />
+        android:layout_alignLeft="@+id/buttonOptions"
+        android:layout_below="@+id/buttonOptions"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/botonacercadeestilo" />
 
 </RelativeLayout>

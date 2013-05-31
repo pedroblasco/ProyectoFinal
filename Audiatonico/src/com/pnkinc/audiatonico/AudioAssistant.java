@@ -2,10 +2,10 @@ package com.pnkinc.audiatonico;
 
 import java.util.Random;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,6 +31,7 @@ public class AudioAssistant
 	private Handler handler = new Handler();
 	private Random rnd = new Random();
 	private int k = 0;
+	boolean aciertoFallo=true;
 
 	// Constructor de la clase, con los ajustes del manejador de sonidos de la aplicación.
 	// Le pasamos el contexto de la aplicación, y le decimos el número de sonidos máximo
@@ -72,13 +73,14 @@ public class AudioAssistant
 	public void playForShow(int sound_id, ImageView image, int[] arrayImages)
 	{
 		image.setImageResource(arrayImages[sound_id]);
-		soundPool.play(sound_id, leftVolume, rightVolume, 1, 0, rate); 
+		soundPool.play(sound_id, leftVolume, rightVolume, 1, 0, rate);
 	}	
 	
 	// Método para administrar los fallos cometidos durante el juego. El máximo de fallos que se pueden cometer, por
 	// defecto, es 3. Puede que se cambie o se haga una nueva opción en el menú de opciones (cuando se cree dicha actividad).
 	public int manageFailures(int fallosCometidos, ImageView fallosMostrar, final TextView textViewJ, int gameCont, 
-			final RelativeLayout relayoutAux, final ImageButton botonaux){
+			final RelativeLayout relayoutAux, final ImageButton botonaux, final ImageView imagePerdidaAux, 
+			final String perdidaAux){
 		if(fallosCometidos==1){
 			fallosMostrar.setImageResource(R.drawable.heartintentosdos);
 		}else if(fallosCometidos==2){
@@ -89,18 +91,18 @@ public class AudioAssistant
 			Handler handler = new Handler();
 			handler.postDelayed(new Runnable() { 
 				public void run() {
+					relayoutAux.setVisibility(View.INVISIBLE);
 					textViewJ.setVisibility(View.VISIBLE);
 					textViewJ.setTextSize(0x00000001, 25);
-					textViewJ.setText("¡HAS PERDIDO!");
-					relayoutAux.setVisibility(View.INVISIBLE);
+					textViewJ.setText(perdidaAux);
+					imagePerdidaAux.setImageResource(R.drawable.skull);
+					imagePerdidaAux.setVisibility(View.VISIBLE);
 					Handler handler = new Handler();
 					handler.postDelayed(new Runnable() { 
 						public void run() {
-							textViewJ.setVisibility(View.INVISIBLE);
-							textViewJ.setTextSize(0x00000001, 35);
 							botonaux.setVisibility(View.VISIBLE);
 						}
-					}, 1500);
+					}, 2000);
 				}
 			}, 1000);
 		}else{
@@ -121,13 +123,6 @@ public class AudioAssistant
 	public void stopSound(int i){
 		soundPool.stop(i);
 	}
-	
-	
-	/*public int playAndShowSound(String textoNota, int sound_id){
-		textoNota = String.valueOf(sound_id);
-		play(sound_id);
-		return sound_id;
-	}*/
 
 	// Método creado para liberar todos los sonidos cargados previamente en memoria. 
 	// Su uso de momento ha sido para pruebas y poco más.
@@ -168,16 +163,20 @@ public class AudioAssistant
 	}
 	
 	public int roundBeaten(int juego, final RelativeLayout relayAux, final ImageButton botonAux, 
-			final TextView textShow, final ImageView imageNota){
+			final TextView textShow, final ImageView imageNota, final ImageView imageSuperadaAux, 
+			final String rondaSupI, final String rondaSupII){
 		juego++;
+		final int aux = juego;
 		handler.postDelayed(new Runnable() { 
 			public void run() {
 				relayAux.setVisibility(View.INVISIBLE);
 				textShow.setVisibility(View.VISIBLE);
-				textShow.setText("¡SUPERADA!");
+				imageSuperadaAux.setImageResource(R.drawable.trophy);
+				imageSuperadaAux.setVisibility(View.VISIBLE);
+				textShow.setTextSize(0x00000001, 20);
+				textShow.setText(rondaSupI + " " + (aux) + " " + rondaSupII);
 				handler.postDelayed(new Runnable() { 
 					public void run() {
-						textShow.setVisibility(View.INVISIBLE);
 						imageNota.setImageResource(R.drawable.viewpred);
 						botonAux.setVisibility(View.VISIBLE);
 					}
@@ -209,17 +208,36 @@ public class AudioAssistant
 		}
 	}
 	
-	public int compareSounds (int soundIdSent, int arrayIterator, int[] arrayOfSounds){
-		if(soundIdSent !=0){
-			if(soundIdSent == arrayOfSounds[arrayIterator]){
-					Log.d("ACIERTO", "¡Has acertado!");
-					arrayIterator++;
-				}else{
-					Log.d("FALLO", "¡Has fallado!");
+	public boolean compareSounds (int soundIdSent, int arrayIterator, int[] arrayOfSounds, final ImageView textoNotaAux, 
+			final TextView textAciErr, RelativeLayout relayAux, final String aciertoAux, final String errorAux){
+		if(soundIdSent == arrayOfSounds[arrayIterator]){
+			aciertoFallo = true;
+			textAciErr.setTextColor(Color.parseColor("#18FF08"));
+			textAciErr.setText(aciertoAux);
+			textAciErr.setVisibility(View.VISIBLE);
+			handler.postDelayed(new Runnable() { 
+				public void run() {
+					textAciErr.setTextColor(Color.parseColor("#ffffff"));
+					textAciErr.setText("");
+					textAciErr.setVisibility(View.INVISIBLE);
+					textoNotaAux.setImageResource(R.drawable.viewpred);
 				}
+			}, 600);
+		}else{
+			aciertoFallo = false;
+			textAciErr.setTextColor(Color.parseColor("#FF1010"));
+			textAciErr.setText(errorAux);
+			textAciErr.setVisibility(View.VISIBLE);
+			handler.postDelayed(new Runnable() { 
+				public void run() {
+					textAciErr.setTextColor(Color.parseColor("#ffffff"));
+					textAciErr.setText("");
+					textAciErr.setVisibility(View.INVISIBLE);
+					textoNotaAux.setImageResource(R.drawable.viewpred);
+				}
+			}, 600);
 		}
-		soundIdSent = 0;
-		return arrayIterator;
+		return aciertoFallo;
 	}
 }
 

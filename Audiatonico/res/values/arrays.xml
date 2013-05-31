@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="idiomas">
+		<item>Español</item>
+		<item>Inglés</item>
+	</string-array>
+	
+	<string-array name="instrumentos">
+		<item>Piano</item>
+		<item>Guitarra Acústica</item>
+		<item>Guitarra Eléctrica</item>
+		<item>Bajo</item>
+	</string-array>
+	
+	<string-array name="dificultad">
+		<item>Fácil</item>
+		<item>Media</item>
+		<item>Difícil</item>
+	</string-array>
+	
+	<string-array name="languages">
+		<item>Spanish</item>
+		<item>English</item>
+	</string-array>
+	
+	<string-array name="instruments">
+		<item>Piano</item>
+		<item>Acoustic Guitar</item>
+		<item>Electric Guitar</item>
+		<item>Bass</item>
+	</string-array>
+	
+	<string-array name="difficulty">
+		<item>Easy</item>
+		<item>Normal</item>
+		<item>Hard</item>
+	</string-array>
+	
+</resources>
