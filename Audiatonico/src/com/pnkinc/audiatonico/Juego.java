@@ -67,14 +67,6 @@ public class Juego extends Activity
 		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		
 		//Cargamos los sonidos y los asignamos a los int para utilizarlos como index o como simples identificadores.
-		doc = snd.load(R.raw.notac);
-		red = snd.load(R.raw.notad);
-		mie = snd.load(R.raw.notae);
-		faf = snd.load(R.raw.notaf);
-		solg = snd.load(R.raw.notag);
-		laa = snd.load(R.raw.notaa);
-		sib = snd.load(R.raw.notab);
-		docag = snd.load(R.raw.notacag);
 		
 		arraySounds = new int[] {doc, red, mie, faf, solg, laa, sib, docag};
 		
@@ -90,43 +82,35 @@ public void clickHandler(View v)
 	switch (id)
 	{
 		case R.id.buttonC:
-			idSound = doc;
-			snd.play(arrayRandomSounds[0]);
+			idSound = snd.play(arraySounds[0]);
 			break;
 		    	  
 		case R.id.buttonD:
-			idSound = red;
-			snd.play(idSound);
+			idSound = snd.play(arraySounds[1]);
 			break;
 		    	   
 		case R.id.buttonE:
-			idSound = mie;
-			snd.play(idSound);
+			idSound = snd.play(arraySounds[2]);
 			break;    	  
 		       	  
 		case R.id.buttonF:
-			idSound = faf;
-			snd.play(idSound);
+			idSound = snd.play(arraySounds[3]);
 			break;    	  
 		          	  
 		case R.id.buttonG:
-			idSound = solg;
-			snd.play(idSound);
+			idSound = snd.play(arraySounds[4]);
 			break;    	  
 		          	  
 		case R.id.buttonA:
-			idSound = laa;
-			snd.play(idSound);
+			idSound = snd.play(arraySounds[5]);
 			break;    
 		         
 		case R.id.buttonB:
-			idSound = sib;
-			snd.play(idSound);
+			idSound = snd.play(arraySounds[6]);
 			break;
 			
 		case R.id.buttonCag:
-			idSound = docag;
-			snd.play(idSound);
+			idSound = snd.play(arraySounds[7]);
 			break;
 		
 		case R.id.buttonRepeat:
@@ -152,12 +136,6 @@ public void clickHandler(View v)
 			break;
 		}
 	
-		if(fallos>=1){
-			repiteSecuencia.setVisibility(View.INVISIBLE);
-		}else{
-			repiteSecuencia.setVisibility(View.VISIBLE);
-		}
-	
 		if(idSound !=0){
 			trueFalse = snd.compareSounds(idSound, cont, arrayRandomSounds, textoNota, textoJuego, botones1, textAcierto, textFallo);
 			if(trueFalse==true){
@@ -174,12 +152,21 @@ public void clickHandler(View v)
 			juego = snd.roundBeaten(juego, botones1, botonArr1, textoJuego, textoNota, winOrLose, textRondaSuperadaI, textRondaSuperadaII);
 			cont = 0;		
 		}
+		
+		if(fallos>1){
+			repiteSecuencia.setVisibility(View.INVISIBLE);
+		}else{
+			repiteSecuencia.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void showUserSettings() {
 		SharedPreferences preferences = getSharedPreferences("AudiaPrefs",Context.MODE_PRIVATE);
 		int posId = preferences.getInt("POSICION_IDIOMA", 0);
 		int posDif = preferences.getInt("POSICION_DIFICULTAD", 0);
+		int posIns = preferences.getInt("POSICION_INSTRUMENTO",  0);
+		
+		arraySounds = snd.instrumentChooser(posIns);
 		
 		if (posDif==0){
 			if(posId==1){
@@ -189,6 +176,12 @@ public void clickHandler(View v)
 				arrayImages = new int[] {R.drawable.viewpred, R.drawable.notado, R.drawable.notare, R.drawable.notami, 
 						R.drawable.notafa, R.drawable.notasol, R.drawable.notala, R.drawable.notasi, R.drawable.notadoag};
 			}
+		}else if(posDif==1){
+			arrayImages = new int[] {R.drawable.viewpred, R.drawable.notadopic, R.drawable.notarepic, R.drawable.notamipic, 
+				R.drawable.notafapic, R.drawable.notasolpic, R.drawable.notalapic, R.drawable.notasipic, R.drawable.notadoagpic};
+		}else{
+			arrayImages = new int[] {R.drawable.viewpred, R.drawable.notamaxdif, R.drawable.notamaxdif, R.drawable.notamaxdif, 
+					R.drawable.notamaxdif, R.drawable.notamaxdif, R.drawable.notamaxdif, R.drawable.notamaxdif, R.drawable.notamaxdif};
 		}
 		
 		if (posId == 1){
@@ -207,7 +200,7 @@ public void clickHandler(View v)
 			botonB.setBackgroundResource(R.drawable.notabestilo);
 			botonCag.setBackgroundResource(R.drawable.notacagestilo);
 		}else{
-			textRonda = "Ronda " + juego; 
+			textRonda = "Ronda"; 
 			textAcierto = "¡Acierto!";
 			textFallo = "¡Fallo!"; 
 			textRondaSuperadaI = "¡Ronda"; 

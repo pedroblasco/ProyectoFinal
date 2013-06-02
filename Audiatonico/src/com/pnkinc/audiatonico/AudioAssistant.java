@@ -208,6 +208,62 @@ public class AudioAssistant
 		}
 	}
 	
+	public int[] instrumentChooser(int instrId){
+		int[] arrayInstrument;
+		int doaux, reaux, miaux, faaux, solaux, laaux, siaux, doagaux;
+		
+		if(instrId == 1){
+			doaux = load(R.raw.guiacdo);
+			reaux = load(R.raw.guiacre);
+			miaux = load(R.raw.guiacmi);
+			faaux = load(R.raw.guiacfa);
+			solaux = load(R.raw.guiacsol);
+			laaux = load(R.raw.guiacla);
+			siaux = load(R.raw.guiacsi);
+			doagaux = load(R.raw.guiacdoag);
+		}else if(instrId == 2){
+			doaux = load(R.raw.guieldo);
+			reaux = load(R.raw.guielre);
+			miaux = load(R.raw.guielmi);
+			faaux = load(R.raw.guielfa);
+			solaux = load(R.raw.guielsol);
+			laaux = load(R.raw.guiella);
+			siaux = load(R.raw.guielsi);
+			doagaux = load(R.raw.guieldoag);
+		}else if(instrId == 3){
+			doaux = load(R.raw.baacdo);
+			reaux = load(R.raw.baacre);
+			miaux = load(R.raw.baacmi);
+			faaux = load(R.raw.baacfa);
+			solaux = load(R.raw.baacsol);
+			laaux = load(R.raw.baacla);
+			siaux = load(R.raw.baacsi);
+			doagaux = load(R.raw.baacdoag);
+		}else if(instrId == 4){
+			doaux = load(R.raw.baeldo);
+			reaux = load(R.raw.baelre);
+			miaux = load(R.raw.baelmi);
+			faaux = load(R.raw.baelfa);
+			solaux = load(R.raw.baelsol);
+			laaux = load(R.raw.baella);
+			siaux = load(R.raw.baelsi);
+			doagaux = load(R.raw.baeldoag);
+		}else{
+			doaux = load(R.raw.piado);
+			reaux = load(R.raw.piare);
+			miaux = load(R.raw.piami);
+			faaux = load(R.raw.piafa);
+			solaux = load(R.raw.piasol);
+			laaux = load(R.raw.piala);
+			siaux = load(R.raw.piasi);
+			doagaux = load(R.raw.piadoag);
+		}
+		
+		arrayInstrument = new int[]{doaux, reaux, miaux, faaux, solaux, laaux, siaux, doagaux};
+		
+		return arrayInstrument;
+	}
+	
 	public boolean compareSounds (int soundIdSent, int arrayIterator, int[] arrayOfSounds, final ImageView textoNotaAux, 
 			final TextView textAciErr, RelativeLayout relayAux, final String aciertoAux, final String errorAux){
 		if(soundIdSent == arrayOfSounds[arrayIterator]){

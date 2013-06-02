@@ -9,7 +9,8 @@
 		<item>Piano</item>
 		<item>Guitarra Acústica</item>
 		<item>Guitarra Eléctrica</item>
-		<item>Bajo</item>
+		<item>Bajo Acústico</item>
+		<item>Bajo Eléctrico</item>
 	</string-array>
 	
 	<string-array name="dificultad">
@@ -27,7 +28,8 @@
 		<item>Piano</item>
 		<item>Acoustic Guitar</item>
 		<item>Electric Guitar</item>
-		<item>Bass</item>
+		<item>Electric Bass</item>
+		<item>Acoustic Bass</item>
 	</string-array>
 	
 	<string-array name="difficulty">
