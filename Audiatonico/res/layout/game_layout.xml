@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="#000000">
+
+    <ImageButton
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/boton_go_estilo"
+        android:onClick="clickHandler" 
+        android:contentDescription="@string/description"/>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:src="@drawable/viewpred" 
+        android:contentDescription="@string/description"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/button1"
+        android:layout_marginLeft="3dp"
+        android:src="@drawable/heartintentosfull" 
+        android:contentDescription="@string/description"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1.5dp"
+        android:textColor="#ffffff"
+        android:textSize="35sp" />
+
+<RelativeLayout
+    android:id="@+id/relayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/button1"
+    android:layout_marginTop="70dp"
+    android:background="#000000" >
+
+        <ImageButton
+            android:id="@+id/buttonA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/buttonE"
+            android:layout_below="@+id/buttonE"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/boton_la_estilo"
+            android:onClick="clickHandler"
+            android:contentDescription="@string/description" />
+
+        <ImageButton
+            android:id="@+id/buttonF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonC"
+            android:layout_marginTop="40dp"
+            android:layout_toLeftOf="@+id/buttonG"
+            android:background="@drawable/boton_fa_estilo"
+            android:onClick="clickHandler"
+            android:contentDescription="@string/description" />
+
+        <ImageButton
+            android:id="@+id/buttonCag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/buttonA"
+            android:layout_below="@+id/buttonA"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/boton_doag_estilo"
+            android:onClick="clickHandler"
+            android:contentDescription="@string/description" />
+
+        <ImageButton
+            android:id="@+id/buttonG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonCag"
+            android:layout_toLeftOf="@+id/buttonA"
+            android:background="@drawable/boton_sol_estilo"
+            android:onClick="clickHandler"
+            android:contentDescription="@string/description" />
+
+        <ImageButton
+            android:id="@+id/buttonRepeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/buttonCag"
+            android:layout_toRightOf="@+id/buttonF"
+            android:background="@drawable/boton_repeat_estilo"
+            android:onClick="clickHandler"
+            android:contentDescription="@string/description" />
+
+        <ImageButton
+            android:id="@+id/buttonB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/buttonRepeat"
+            android:layout_toLeftOf="@+id/buttonRepeat"
+            android:background="@drawable/boton_si_estilo"
+            android:onClick="clickHandler"
+            android:contentDescription="@string/description" />
+
+        <ImageButton
+            android:id="@+id/buttonC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/buttonD"
+            android:background="@drawable/boton_do_estilo"
+            android:onClick="clickHandler"
+            android:contentDescription="@string/description" />
+
+        <ImageButton
+            android:id="@+id/buttonD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonA"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/boton_re_estilo"
+            android:onClick="clickHandler"
+           	android:contentDescription="@string/description"	 />
+
+        <ImageButton
+            android:id="@+id/buttonE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonF"
+            android:layout_toRightOf="@+id/buttonD"
+            android:background="@drawable/boton_mi_estilo"
+            android:onClick="clickHandler"
+            android:contentDescription="@string/description" />
+
+    </RelativeLayout>
+    
+    <ImageView
+        android:id="@+id/imageWinOrLose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+        android:src="@drawable/trophy" 
+        android:contentDescription="@string/description" />
+
+</RelativeLayout>

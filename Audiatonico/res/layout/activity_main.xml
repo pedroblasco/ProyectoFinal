@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:contentDescription="@string/description"
+        android:src="@drawable/logo" />
+
+    <ImageButton
+        android:id="@+id/buttonGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/boton_unjugador_estilo"
+        android:contentDescription="@string/description" />
+    
+    <ImageButton
+        android:id="@+id/buttonTwoGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonGame"
+        android:layout_below="@+id/buttonGame"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/boton_dosjugadores_estilo"
+        android:contentDescription="@string/description" />
+
+    <ImageButton
+        android:id="@+id/buttonOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="38dp"
+        android:layout_toLeftOf="@+id/buttonTwoGame"
+        android:background="@drawable/boton_options_estilo"
+        android:contentDescription="@string/description" />
+    
+    <ImageButton
+        android:id="@+id/buttonScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="38dp"
+        android:layout_toRightOf="@+id/buttonTwoGame"
+        android:background="@drawable/boton_score_estilo"
+        android:contentDescription="@string/description" />
+    
+</RelativeLayout>
