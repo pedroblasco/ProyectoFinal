@@ -156,11 +156,11 @@ public final class R {
     }
     public static final class id {
         public static final int borrarBbDd=0x7f0b000c;
-        public static final int botonDificil=0x7f0b002a;
-        public static final int botonDosJug=0x7f0b001e;
-        public static final int botonFacil=0x7f0b0024;
-        public static final int botonMedio=0x7f0b0029;
-        public static final int botonUnJug=0x7f0b001f;
+        public static final int botonDificil=0x7f0b002b;
+        public static final int botonDosJug=0x7f0b001f;
+        public static final int botonFacil=0x7f0b0025;
+        public static final int botonMedio=0x7f0b002a;
+        public static final int botonUnJug=0x7f0b0020;
         public static final int button1=0x7f0b000d;
         public static final int buttonA=0x7f0b0011;
         public static final int buttonB=0x7f0b0018;
@@ -179,17 +179,18 @@ public final class R {
         public static final int imageView1=0x7f0b0000;
         public static final int imageView2=0x7f0b000e;
         public static final int imageWinOrLose=0x7f0b001a;
-        public static final int menu_settings=0x7f0b002b;
-        public static final int nombre=0x7f0b001c;
-        public static final int numPorcenNum=0x7f0b0025;
-        public static final int numPorcenText=0x7f0b0026;
-        public static final int numRondasNum=0x7f0b0022;
-        public static final int numRondasText=0x7f0b0023;
+        public static final int menu_settings=0x7f0b002c;
+        public static final int nombre=0x7f0b001d;
+        public static final int numPorcenNum=0x7f0b0026;
+        public static final int numPorcenText=0x7f0b0027;
+        public static final int numRondasNum=0x7f0b0023;
+        public static final int numRondasText=0x7f0b0024;
         public static final int relayout1=0x7f0b0010;
-        public static final int rondasMejNum=0x7f0b0027;
-        public static final int rondasMejText=0x7f0b0028;
-        public static final int rounds=0x7f0b001d;
-        public static final int rowLayout=0x7f0b001b;
+        public static final int restoText=0x7f0b001b;
+        public static final int rondasMejNum=0x7f0b0028;
+        public static final int rondasMejText=0x7f0b0029;
+        public static final int rounds=0x7f0b001e;
+        public static final int rowLayout=0x7f0b001c;
         public static final int setDifficulty=0x7f0b0007;
         public static final int setInstrument=0x7f0b0009;
         public static final int textBbDd=0x7f0b000b;
@@ -197,8 +198,8 @@ public final class R {
         public static final int textIdioma=0x7f0b0005;
         public static final int textInstrumento=0x7f0b000a;
         public static final int textView1=0x7f0b000f;
-        public static final int textoPuntu=0x7f0b0020;
-        public static final int vistaPuntu=0x7f0b0021;
+        public static final int textoPuntu=0x7f0b0021;
+        public static final int vistaPuntu=0x7f0b0022;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

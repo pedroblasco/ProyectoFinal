@@ -161,4 +161,12 @@
         android:src="@drawable/trophy" 
         android:contentDescription="@string/description" />
 
+    <TextView
+        android:id="@+id/restoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginTop="5dp" />
+
 </RelativeLayout>

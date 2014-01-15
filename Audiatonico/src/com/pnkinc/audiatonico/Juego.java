@@ -25,12 +25,12 @@ public class Juego extends Activity
 	private int[] arraySounds, arrayRandomSounds, arrayImages, arrayAux2Play;
 	private int dif = 0, cont = 0, idSound = 0, gameValue = 0, HAS_STARTED = 0, JUST_CREATED = 0, 
 			fallos = 0, pow = 0, playerControl = 0, playerNum = 0, juego = 0, dosJug = 1, 
-			player1cont = 0, player2cont = 0, player1fin = 0, player2fin = 0;
+			player1cont = 0, player2cont = 0, player1fin = 0, player2fin = 0, resto = 0;
 	String textRonda, textAcierto, textFallo, textRondaSuperadaI, textRondaSuperadaII, 
 		textPierdesJuego, textContPlayer, textInput, textNumNot, textPlay, textGameWon,
 		guardaPuntu, nomPlayerUno, nomPlayerDos;  
 	private ImageView textoNota, intentosRestantes, winOrLose;
-	private TextView textoJuego;
+	private TextView textoJuego, restoNotas;
 	private ImageButton repiteSecuencia, botonArr1, botonC, botonD, botonE, botonF, 
 			botonG, botonA, botonB, botonCag;
 	private RelativeLayout botones1;
@@ -66,6 +66,7 @@ public class Juego extends Activity
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR, dif INT, rounds INT)");
 	     
 		textoJuego = (TextView)findViewById(R.id.textView1);
+		restoNotas = (TextView)findViewById(R.id.restoText);
 		textoNota = (ImageView)findViewById(R.id.imageView1);
 		repiteSecuencia = (ImageButton)findViewById(R.id.buttonRepeat);
 		intentosRestantes = (ImageView)findViewById(R.id.imageView2);
@@ -75,6 +76,9 @@ public class Juego extends Activity
 		Typeface fuenteJuego = Typeface.createFromAsset(getAssets(), "fonts/8bitwonder.ttf");
 		textoJuego.setTypeface(fuenteJuego);
 		textoJuego.setVisibility(View.INVISIBLE);
+		restoNotas.setTypeface(fuenteJuego);
+		restoNotas.setTextColor(Color.WHITE);
+		restoNotas.setVisibility(View.INVISIBLE);
 		
 		botonC = (ImageButton)findViewById(R.id.buttonC);
 		botonD = (ImageButton)findViewById(R.id.buttonD);
@@ -120,7 +124,7 @@ public class Juego extends Activity
 public void clickHandler(View v)
 {	
 	int id = v.getId(); // Reconoce la id de los botones (asignada en el xml) para reproducir los sonidos.
-
+	
 	switch (id)
 	{
 		case R.id.buttonC:
@@ -177,6 +181,13 @@ public void clickHandler(View v)
 					} 
 				}, 1300);
 				snd.playAndShow(arrayImages, arrayRandomSounds, textoNota, botones1);
+				handler.postDelayed(new Runnable() { 
+					public void run() {
+						resto = getValorResto(resto);
+						restoNotas.setText("Resto: " + resto);
+						restoNotas.setVisibility(View.VISIBLE);
+					} 
+				}, 1300);
 				HAS_STARTED = 1;
 				break;
 			}else{
@@ -197,6 +208,15 @@ public void clickHandler(View v)
 						}, 1300);
 					} 
 				}, 1300);
+				
+				handler.postDelayed(new Runnable() { 
+					public void run() {
+						resto = getValorResto2players(resto);
+						restoNotas.setText("Resto: " + resto);
+						restoNotas.setVisibility(View.VISIBLE);
+					} 
+				}, 1300);
+				
 				HAS_STARTED = 1;
 				break;
 			}
@@ -270,6 +290,14 @@ public void clickHandler(View v)
 				fallos++;
 			}
 			idSound=0;
+			resto = getValorResto(resto);
+			resto -= cont;
+			if (resto == 0){
+				restoNotas.setVisibility(View.INVISIBLE);
+			}else{
+				restoNotas.setText("Resto : " + resto);
+			}
+			
 		}
 		if(gameValue == 1){
 			if(fallos > 2){
@@ -301,6 +329,7 @@ public void clickHandler(View v)
 				public void run() {
 					botones1.setVisibility(View.INVISIBLE);
 					textoJuego.setVisibility(View.VISIBLE);
+					restoNotas.setVisibility(View.INVISIBLE);
 					textoJuego.setTextSize(0x00000001, 25);
 					textoJuego.setText(textPierdesJuego);
 					winOrLose.setImageResource(R.drawable.skull);
@@ -335,6 +364,7 @@ public void clickHandler(View v)
 			handler.postDelayed(new Runnable() { 
 				public void run() {
 					botones1.setVisibility(View.INVISIBLE);
+					restoNotas.setVisibility(View.INVISIBLE);
 					textoJuego.setVisibility(View.VISIBLE);
 					winOrLose.setImageResource(R.drawable.trophy);
 					winOrLose.setVisibility(View.VISIBLE);
@@ -555,6 +585,21 @@ public void clickHandler(View v)
         });
 		AlertDialog alert = build.create();
 		alert.show();
+	}
+	
+	public int getValorResto(int resto){
+		if(juego == 0){
+			resto = 2;
+		}else if(juego !=0){
+			resto = (2 * juego) + 2;
+		}
+		
+		return resto;		
+	}
+	
+	public int getValorResto2players(int resto){
+		resto = dosJug * 4;
+		return resto;		
 	}
 	
 	private int showUserSettings(int posDif) {
